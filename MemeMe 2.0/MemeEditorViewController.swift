@@ -133,7 +133,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func openCamera(sender: AnyObject) {
-        simplify(true)
+//        simplify(true)
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            simplify(true)
+        } else {
+            let alertController = UIAlertController(title: "", message: "CAMERA IS UNAVAILABLE", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancel(sender: AnyObject) {
